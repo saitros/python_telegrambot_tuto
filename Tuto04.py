@@ -2,6 +2,7 @@
 
 import requests
 from flask import Flask, request, Response
+from API import movie_info_search, movie_code_search
 
 API_KEY = 'API_KEY'
 
@@ -23,7 +24,7 @@ def parse_message(message):
     return chat_id, msg
 
 
-def send_message(chat_id):
+def send_message(chat_id, text):
     """
     chat_id : 사용자 아이디 코드
     text : 사용자 대화내용
@@ -36,7 +37,9 @@ def send_message(chat_id):
     """
     url = 'https://api.telegram.org/bot{token}/sendMessage'.format(token=API_KEY)
     # 변수들을 딕셔너리 형식으로 묶음
-    params = {'chat_id': chat_id, 'text': '안녕!'}
+    # 사용자에게 보내는 text는 사용자가 보낸 text와 똑같다
+    # 똑같은 소리를 한다고 해서 Echo_bot
+    params = {'chat_id': chat_id, 'text': text}
 
     # Url 에 params 를 json 형식으로 변환하여 전송
     # 메세지를 전송하는 부분
@@ -56,6 +59,10 @@ def index():
         chat_id, msg = parse_message(message)
 
         # send_message 함수에 두가지 변수를 전달
+        if msg[:3] == "무비봇":
+            movie_name, movie_main_actors = movie_info_search(movie_code_search(msg[3:]))
+            msg = movie_name + "의 주연 배우는 " + ", ".join(movie_main_actors) + " 입니다."
+
         send_message(chat_id, msg)
 
         # 여기까지 오류가 없으면 서버상태 200 으로 반응
