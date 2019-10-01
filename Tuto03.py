@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-import json
 import requests
 from flask import Flask, request, Response
 
@@ -29,7 +28,7 @@ def send_message(chat_id, text):
     """
     url = 'https://api.telegram.org/bot{token}/sendMessage'.format(token=API_KEY)
     # 변수들을 딕셔너리 형식으로 묶음
-    params = {'chat_id': chat_id, 'text': '안녕!'}
+    params = {'chat_id': chat_id, 'text': text}
 
     # Url 에 params 를 json 형식으로 변환하여 전송
     # 메세지를 전송하는 부분
@@ -53,7 +52,7 @@ def send_keyboard(chat_id, text):
             {'text': '버튼2'
              }],
             [{'text': '버튼3'},
-             {'text': '버튼4'}]
+             {'text': '바튼4'}]
         ],
         'one_time_keyboard': True
     }
@@ -76,9 +75,9 @@ def index():
         chat_id, msg = parse_message(message)
 
         if '버튼' in msg:
-            send_message()
+            send_message(chat_id, msg)
 
-        send_message(chat_id, msg)
+        send_keyboard(chat_id, msg)
 
         return Response('ok', status=200)
     else:
@@ -88,4 +87,4 @@ def index():
 # Python 에서는 실행시킬때 __name__ 이라는 변수에
 # __main__ 이라는 값이 할당
 if __name__ == '__main__':
-    app.run(port=5000)
+    app.run(port=5000, host='0.0.0.0')
