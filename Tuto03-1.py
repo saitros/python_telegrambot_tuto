@@ -83,6 +83,7 @@ def index():
 
         if '버튼' in msg:
             send_keyboard(chat_id, msg)
+            return Response('ok', status=200)
 
         send_message(chat_id, msg)
 

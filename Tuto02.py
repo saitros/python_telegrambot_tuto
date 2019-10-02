@@ -26,12 +26,6 @@ def parse_message(message):
 def send_message(chat_id):
     """
     chat_id : 사용자 아이디 코드
-    text : 사용자 대화내용
-
-    Return :
-    함수에 변수를 할당할때 text='hello' 라고 선언
-    --> text에 관련된 값이 전달되지 않으면 hello를 default로 사용
-
     사용자에게 메세지를 보내는 내용의 함수
     """
     url = 'https://api.telegram.org/bot{token}/sendMessage'.format(token=API_KEY)
@@ -56,7 +50,7 @@ def index():
         chat_id, msg = parse_message(message)
 
         # send_message 함수에 두가지 변수를 전달
-        send_message(chat_id, msg)
+        send_message(chat_id)
 
         # 여기까지 오류가 없으면 서버상태 200 으로 반응
         return Response('ok', status=200)

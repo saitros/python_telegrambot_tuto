@@ -57,7 +57,7 @@ def send_keyboard(chat_id, text):
         'one_time_keyboard': True
     }
     # 변수들을 딕셔너리 형식으로 묶음
-    params = {'chat_id': chat_id, 'text': text, 'reply_markup': keyboard}
+    params = {'chat_id': chat_id, 'text': "자 여기 너가 사용할 키보드야", 'reply_markup': keyboard}
 
     # Url 에 params 를 json 형식으로 변환하여 전송
     # 메세지를 전송하는 부분
@@ -75,9 +75,10 @@ def index():
         chat_id, msg = parse_message(message)
 
         if '버튼' in msg:
-            send_message(chat_id, msg)
+            send_keyboard(chat_id, msg)
+            return Response('ok', status=200)
 
-        send_keyboard(chat_id, msg)
+        send_message(chat_id, msg)
 
         return Response('ok', status=200)
     else:
