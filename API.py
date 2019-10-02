@@ -27,7 +27,7 @@ def movie_code_search(movie_name):
         # movie_info 에서 내가 원하는 movie_code만 빼오기
         return movie_info["movieListResult"]["movieList"][0]["movieCd"]
     except:
-        print("영화 이름을 다시 한번 확인해주세요.")
+        return "movie name error"
 
 
 # 다른 API를 통해서 영화 코드를 던져주고 영화 정보 리턴

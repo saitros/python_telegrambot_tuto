@@ -60,8 +60,12 @@ def index():
 
         # send_message 함수에 두가지 변수를 전달
         if msg[:3] == "무비봇":
-            movie_name, movie_main_actors = movie_info_search(movie_code_search(msg[3:]))
-            msg = movie_name + "의 주연 배우는 " + ", ".join(movie_main_actors) + " 입니다."
+            movie_code = movie_code_search(msg[3:])
+            if movie_code == 'movie name error':
+                msg = "잘못된 영화 이름입니다"
+            else:
+                movie_name, movie_main_actors = movie_info_search(movie_code)
+                msg = movie_name + "의 주연 배우는 " + ", ".join(movie_main_actors) + " 입니다."
 
         send_message(chat_id, msg)
 
