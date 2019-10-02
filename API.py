@@ -3,7 +3,7 @@ import json
 
 # 발급 받은 API_KEY
 # 해당 정보를 가지고 오는 End-point URL
-API_KEY = "53d6fc9515381a34b3841b9c85321534"
+API_KEY = "API_KEY"
 code_search_url = "http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieList.json"
 movie_info_search_url = "http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieInfo.json"
 
@@ -40,8 +40,3 @@ def movie_info_search(movie_code):
     main_actors = [actors[i]['peopleNm'] for i in range(3)]
     return movie_name, main_actors
 
-
-if __name__ == "__main__":
-    movie_name, movie_main_actors = movie_info_search(movie_code_search('광해'))
-    msg = movie_name + "의 주연 배우는 " + ", ".join(movie_main_actors) + " 입니다."
-    print(msg)

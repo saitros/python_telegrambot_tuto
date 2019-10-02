@@ -87,4 +87,4 @@ def index():
 # Python 에서는 실행시킬때 __name__ 이라는 변수에
 # __main__ 이라는 값이 할당
 if __name__ == '__main__':
-    app.run(port=5000, host='0.0.0.0')
+    app.run(port=80, host='0.0.0.0')
